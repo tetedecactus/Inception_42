@@ -1,0 +1,33 @@
+# https://collabnix.com/docker-compose-cheatsheet/
+
+version: '3.8'
+
+
+
+services:
+  
+
+
+  # mariadb:
+  #   image:
+
+
+
+  ngnix:
+    image:
+
+
+
+  # wordpress:
+  #   image:
+
+  #   depends_on:
+  #     - ngnix
+
+
+
+networks:
+  my-network:
+    driver: bridge
+
+
