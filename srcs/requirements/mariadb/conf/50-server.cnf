@@ -1,0 +1,8 @@
+# https://mariadb.com/kb/en/configuring-mariadb-with-option-files/
+
+[mysqld]
+user = mysql
+port = 3306
+datadir = /var/lib/mysql
+socket  = /run/mysqld/mysqld.sock
+bind_address = *
