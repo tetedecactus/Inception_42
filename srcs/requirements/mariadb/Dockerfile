@@ -1,8 +1,8 @@
-FROM alpine:latest
+FROM debian:buster
 
-RUN apk update && apk upgrade  
+RUN apt-get update -y && apt-get upgrade -y
 
-RUN apk add mariadb
+RUN apt-get install mariadb-server -y
 
 LABEL version="1.0"
 LABEL description="MariaDB Server"
