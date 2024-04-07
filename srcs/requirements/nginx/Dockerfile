@@ -17,7 +17,7 @@ RUN mkdir -p /etc/nginx/ssl
 # -subj -> defines the subject information that will be embedded in the certificate
 RUN openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt \
     -keyout /etc/nginx/ssl/inception.key \
-    -subj "/C=CA/ST=QC/L=Quebec/O=42/OU=42/CN=login.42.fr/UID=olabrecq" 
+    -subj "/C=CA/ST=QC/L=Quebec/O=42/OU=42/CN=login.42.fr/UID=login" 
 
 # create folder for config file
 RUN mkdir -p /var/run/nginx
