@@ -1,4 +1,7 @@
-# https://mariadb.com/kb/en/configuring-mariadb-with-option-files/
+[client-server]
+!includedir /etc/mysql/conf.d/
+!includedir /etc/mysql/mariadb.conf.d/
+
 
 [mysqld]
 user = mysql
