@@ -18,12 +18,12 @@ services:
 
 
 
-  ngnix:
-    build: requirements/ngnix/ -t .
-    container_name: ngnix
-    image:
-    ports:
-      -3306
+  # ngnix:
+  #   build: requirements/ngnix/ -t .
+  #   container_name: ngnix
+  #   image:
+  #   ports:
+  #     -3306
 
 
   # wordpress:

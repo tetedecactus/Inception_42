@@ -1,8 +1,3 @@
-[client-server]
-!includedir /etc/mysql/conf.d/
-!includedir /etc/mysql/mariadb.conf.d/
-
-
 [mysqld]
 user = mysql
 port = 3306
