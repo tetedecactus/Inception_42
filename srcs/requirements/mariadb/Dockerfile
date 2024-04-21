@@ -17,6 +17,9 @@ LABEL description="MariaDB Server"
 HEALTHCHECK --start-period=5m \
   CMD mariadb -e 'SELECT @@datadir;' || exit 1
 
+# Expose the default port of MariaDB
+EXPOSE 3306
+
 # Copie du fichier de configuration personnalisé
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -32,29 +35,8 @@ RUN chmod +x /app/init_db.sh
 # Exécution du script d'initialisation après le démarrage de MariaDB
 ENTRYPOINT [ "/app/init_db.sh" ]
 
-CMD [ "mysql" ]
-# Expose the default port of MariaDB
-# EXPOSE 3306
+# CMD [ "mysql" ]
 
-# COPY conf/50-server.cnf /etc/mysql/mariadb.cnf.d/50-server.cnf
-
-# CMD needs to be replaced with a command that uses environment variables if applicable 
-# CMD ["mysqld"]
-
-# Script pour créer la base de données et l'utilisateur après le démarrage de MySQL
-# COPY init_db.sh /app/init_db.sh
-# RUN chmod +x /app/init_db.sh
-# 
-# Start MySQL with environment variables (if used)
-# RUN service mysql start # Supprimé
-
-# Commenté pour exécuter les commandes après le démarrage de MySQL
-# RUN mysql -e "CREATE DATABASE IF NOT EXISTS ${SQL_DATABASE};" && \
-#     mysql -e "CREATE USER IF NOT EXISTS '${SQL_USER}'@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';" && \
-#     mysql -e "GRANT ALL PRIVILEGES ON ${SQL_DATABASE}.* TO '${SQL_USER}'@'localhost';"
-
-# Exécute le script pour créer la base de données et l'utilisateur après le démarrage de MySQL
-# CMD ["/app/init_db.sh"]
 
 # Liens utiles pour la configuration et la personnalisation de l'image MariaDB
 # https://mariadb.com/kb/en/creating-a-custom-container-image/
