@@ -19,6 +19,6 @@ mysql -u root -p"$SQL_ROOT_PASSWORD" -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABAS
 # Flush privileges
 mysql -u root -p"$SQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
 
-echo "Database '${SQL_DATABASE}' created with user '${SQL_USER}' and password '${SQL_PASSWORD}'"
+# echo "Database '${SQL_DATABASE}' created with user '${SQL_USER}' and password '${SQL_PASSWORD}'"
 
 bash
