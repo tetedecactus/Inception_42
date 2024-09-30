@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM alpine:3.19
 
 RUN apt update -y && apt upgrade -y
 
@@ -30,4 +30,7 @@ RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 9000
 
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["-g", "daemon off;"]
+ENTRYPOINT ["nginx"]

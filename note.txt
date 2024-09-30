@@ -1,0 +1,12 @@
+
+docker build -t mariadb .
+
+
+docker image prune -f
+
+docker container prune -f
+
+docker image prune -af
+
+
+docker run -it --rm --name mariadb mariadb bash

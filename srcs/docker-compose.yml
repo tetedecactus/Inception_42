@@ -1,41 +1,93 @@
 # https://collabnix.com/docker-compose-cheatsheet/
 # https://tuto.grademe.fr/inception/
 
-version: '3.8'
-
+version: "3.8"
 
 
 services:
-  
 
-
+#Container MariaDB
+## PDF •Un container Docker contenant MariaDB uniquement sans nginx.
   mariadb:
-    build: requirements/mariadb/ -t .
+    image: inception:mariadb
     container_name: mariadb
-    image:
+    volumes:
+      - mariadb: /var/lib/mysql
+    networks:
+      - inception
+    build: "./requirements/mariadb"
+    # context:  requirements/mariadb/ -t .
+    dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
-      -3306
+      - "3306"
+    restart: always
 
 
 
-  # ngnix:
-  #   build: requirements/ngnix/ -t .
-  #   container_name: ngnix
-  #   image:
-  #   ports:
-  #     -3306
+# # Container NGNIX
+#   ngnix:
+#     container_name: inception:ngnix
+#     volumes:
+#       - wordpress: "/var/www/wordpress"
+#     networks:
+#       - inception
+#     depends_on:
+#       - wordpress
+#     build: "./requirements/nginx"
+#     # context:  requirements/ngnix
+#     dockerfile: Dockerfile
+#     env_file: .env
+#     ports:
+#       - "443:443"
+#     restart: always
 
 
-  # wordpress:
-  #   image:
 
-  #   depends_on:
-  #     - ngnix
+# # Container Wordpress
+# ## PDF •Un container Docker contenant WordPress + php-fpm (installé et configuré) uniquement sans nginx
+#   wordpress:
+#     container_name: inception:wordpress
+#     volumes:
+#       - wordpress: "/var/www/wordpress"
+#     networks:
+#       - inception
+#     depends_on:
+#       - mariadb
+#     build: "./requirements/wordpress"
+#     # context:  requirements/wordpress
+#     expose:
+#       - "9000"
+#     restart: always
 
 
 
+
+# Le reseau sur lequel les containers communiquent
+## PDF •Un docker-network qui fera le lien entre vos containers.
 networks:
-  my-network:
+  inception:
     driver: bridge
 
 
+
+
+
+# Les volumes de sauveguarde local en cas d'imprevu
+## PDF •Un volume contenant votre base de données WordPress.
+## PDF •Un second volume contenant les fichiers de votre site WordPress.
+volumes:
+  # wordpress:
+  #   driver: local
+  #   driver_opts:
+  #   type: 'none'
+  #   o: 'bind'
+  #   device: '/home/olabrecq/data/wordpress'
+  
+  mariadb:
+    driver: local
+    driver_opts:
+    type: 'none'
+    o: 'bind'
+    device: '/home/olabrecq/data/mariadb'

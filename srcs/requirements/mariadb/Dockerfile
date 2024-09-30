@@ -1,6 +1,16 @@
-FROM debian:buster
+FROM  alpine:3.19
 
-RUN apt-get update -y && apt-get upgrade -y
+RUN   apk update; \
+      apk add mariadb; \
+      rm-rf /var/cache/apk/*
+
+
+
+
+
+
+
+
 
 # Uncomment these lines to use environment variables from .env
 ENV SQL_DATABASE="inception"
@@ -17,10 +27,9 @@ LABEL description="MariaDB Server"
 HEALTHCHECK --start-period=5m \
   CMD mariadb -e 'SELECT @@datadir;' || exit 1
 
-# Expose the default port of MariaDB
 EXPOSE 3306
 
-# Copie du fichier de configuration personnalisé
+# Copie du fichier de configuration personnalisé 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Copie du script pour initialiser la base de données
