@@ -8,58 +8,58 @@ services:
 
 #Container MariaDB
 ## PDF •Un container Docker contenant MariaDB uniquement sans nginx.
-  mariadb:
-    image: inception:mariadb
-    container_name: mariadb
-    volumes:
-      - mariadb: /var/lib/mysql
-    networks:
-      - inception
-    build: "./requirements/mariadb"
-    # context:  requirements/mariadb/ -t .
-    dockerfile: Dockerfile
-    env_file:
-      - .env
-    ports:
-      - "3306"
-    restart: always
+  # mariadb:
+  #   image: inception:mariadb
+  #   container_name: mariadb
+  #   volumes:
+  #     - mariadb: "/var/lib/mysql"
+  #   networks:
+  #     - inception
+  #   build: "./requirements/mariadb"
+  #   # context:  requirements/mariadb/ -t .
+  #   dockerfile: Dockerfile
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "3306"
+  #   restart: always
 
 
 
 # # Container NGNIX
-#   ngnix:
-#     container_name: inception:ngnix
-#     volumes:
-#       - wordpress: "/var/www/wordpress"
-#     networks:
-#       - inception
-#     depends_on:
-#       - wordpress
-#     build: "./requirements/nginx"
-#     # context:  requirements/ngnix
-#     dockerfile: Dockerfile
-#     env_file: .env
-#     ports:
-#       - "443:443"
-#     restart: always
+  ngnix:
+    container_name: inception_ngnix
+    # volumes:
+      # - wordpress: "/var/www/wordpress"
+    networks:
+      - inception
+    # depends_on:
+    #   - wordpress
+    build: "requirements/nginx/."
+    # context:  requirements/ngnix
+    # dockerfile: Dockerfile
+    # env_file: .env
+    ports:
+      - "443:443"
+    # restart: always
 
 
 
 # # Container Wordpress
 # ## PDF •Un container Docker contenant WordPress + php-fpm (installé et configuré) uniquement sans nginx
-#   wordpress:
-#     container_name: inception:wordpress
-#     volumes:
-#       - wordpress: "/var/www/wordpress"
-#     networks:
-#       - inception
-#     depends_on:
-#       - mariadb
-#     build: "./requirements/wordpress"
-#     # context:  requirements/wordpress
-#     expose:
-#       - "9000"
-#     restart: always
+  # wordpress:
+  #   container_name: inception:wordpress
+  #   volumes:
+  #     - wordpress: "/var/www/wordpress"
+  #   networks:
+  #     - inception
+  #   depends_on:
+  #     - mariadb
+  #   build: "./requirements/wordpress"
+  #   # context:  requirements/wordpress
+  #   expose:
+  #     - "9000"
+  #   restart: always
 
 
 
@@ -77,7 +77,7 @@ networks:
 # Les volumes de sauveguarde local en cas d'imprevu
 ## PDF •Un volume contenant votre base de données WordPress.
 ## PDF •Un second volume contenant les fichiers de votre site WordPress.
-volumes:
+# volumes:
   # wordpress:
   #   driver: local
   #   driver_opts:
@@ -85,9 +85,9 @@ volumes:
   #   o: 'bind'
   #   device: '/home/olabrecq/data/wordpress'
   
-  mariadb:
-    driver: local
-    driver_opts:
-    type: 'none'
-    o: 'bind'
-    device: '/home/olabrecq/data/mariadb'
+  # mariadb:
+  #   driver: local
+  #   driver_opts:
+  #   type: 'none'
+  #   o: 'bind'
+  #   device: '/home/olabrecq/data/mariadb'
