@@ -4,14 +4,6 @@ RUN   apk update; \
       apk add mariadb; \
       rm-rf /var/cache/apk/*
 
-
-
-
-
-
-
-
-
 # Uncomment these lines to use environment variables from .env
 ENV SQL_DATABASE="inception"
 ENV SQL_USER="olabrecq"

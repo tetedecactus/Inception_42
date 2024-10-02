@@ -1,8 +1,7 @@
 # https://collabnix.com/docker-compose-cheatsheet/
 # https://tuto.grademe.fr/inception/
 
-version: "3.8"
-
+# version: "3.9"
 
 services:
 
@@ -30,7 +29,7 @@ services:
   ngnix:
     container_name: inception_ngnix
     # volumes:
-      # - wordpress: "/var/www/wordpress"
+    #   - wordpress: "/var/www/wordpress"
     networks:
       - inception
     # depends_on:
@@ -38,10 +37,10 @@ services:
     build: "requirements/nginx/."
     # context:  requirements/ngnix
     # dockerfile: Dockerfile
-    # env_file: .env
+    # env_file: ".env"
     ports:
       - "443:443"
-    # restart: always
+    restart: always
 
 
 
@@ -69,10 +68,6 @@ services:
 networks:
   inception:
     driver: bridge
-
-
-
-
 
 # Les volumes de sauveguarde local en cas d'imprevu
 ## PDF •Un volume contenant votre base de données WordPress.
