@@ -1,16 +1,14 @@
 FROM  alpine:3.19
 
-RUN   apk update; \
-      apk add mariadb; \
-      rm-rf /var/cache/apk/*
+RUN   apk update && \
+      apk add mariadb && \
+      rm -rf /var/cache/apk/*
 
 # Uncomment these lines to use environment variables from .env
 ENV SQL_DATABASE="inception"
 ENV SQL_USER="olabrecq"
 ENV SQL_PASSWORD="kirikou"
 ENV SQL_ROOT_PASSWORD="jeanclaude"
-
-RUN apt-get install mariadb-server -y
 
 LABEL version="1.0"
 LABEL description="MariaDB Server"
@@ -31,7 +29,7 @@ COPY init_db.sh /app/init_db.sh
 RUN chmod +x /app/init_db.sh
 
 # Commande pour démarrer MariaDB
-# CMD ["mysql"]
+CMD ["mysqld"]
 
 # Exécution du script d'initialisation après le démarrage de MariaDB
 ENTRYPOINT [ "/app/init_db.sh" ]

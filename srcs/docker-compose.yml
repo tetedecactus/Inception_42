@@ -7,21 +7,21 @@ services:
 
 #Container MariaDB
 ## PDF •Un container Docker contenant MariaDB uniquement sans nginx.
-  # mariadb:
-  #   image: inception:mariadb
-  #   container_name: mariadb
+  mariadb:
+    # image: inception_mariadb
+    container_name: inception_mariadb
   #   volumes:
   #     - mariadb: "/var/lib/mysql"
-  #   networks:
-  #     - inception
-  #   build: "./requirements/mariadb"
+    networks:
+      - inception
+    build: "requirements/mariadb/."
   #   # context:  requirements/mariadb/ -t .
   #   dockerfile: Dockerfile
   #   env_file:
   #     - .env
-  #   ports:
-  #     - "3306"
-  #   restart: always
+    ports:
+      - "3306"
+    restart: always
 
 
 
@@ -32,8 +32,8 @@ services:
     #   - wordpress: "/var/www/wordpress"
     networks:
       - inception
-    # depends_on:
-    #   - wordpress
+    depends_on:
+      - wordpress
     build: "requirements/nginx/."
     # context:  requirements/ngnix
     # dockerfile: Dockerfile
@@ -46,19 +46,19 @@ services:
 
 # # Container Wordpress
 # ## PDF •Un container Docker contenant WordPress + php-fpm (installé et configuré) uniquement sans nginx
-  # wordpress:
-  #   container_name: inception:wordpress
+  wordpress:
+    container_name: inception_wordpress
   #   volumes:
   #     - wordpress: "/var/www/wordpress"
-  #   networks:
-  #     - inception
-  #   depends_on:
-  #     - mariadb
-  #   build: "./requirements/wordpress"
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    build: "requirements/wordpress/."
   #   # context:  requirements/wordpress
-  #   expose:
-  #     - "9000"
-  #   restart: always
+    ports:
+      - "9000"
+    restart: always
 
 
 

@@ -1,13 +1,14 @@
-FROM debian:buster
+FROM alpine:3.19
 
-RUN apt-get update -y && apt-get upgrade -y
+RUN apk update && apk upgrade
 
-RUN apt-get install -y wget
-
-RUN apt-get install -y php\
-    php-fpm\
-    php-mysql\
+RUN apk add --no-cache wget \
+    php \
+    php-fpm \
+    php-mysqli \
     mariadb-client
+
+RUN adduser -S www-data -G www-data
 
 RUN wget https://wordpress.org/latest.tar.gz
 RUN tar -xvf latest.tar.gz
@@ -17,4 +18,4 @@ RUN chown -R www-data:www-data /var/www/html/wordpress
 
 EXPOSE 80
 
-CMD ["php-fpm"]
+CMD ["php-fpm", "-F"]
